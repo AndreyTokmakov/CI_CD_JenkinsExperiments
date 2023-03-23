@@ -1,10 +1,28 @@
 pipeline {
     agent any
-    parameters {
+
+    parameters
+    {
         string(name: 'reason', description: 'Reason to run the job')
     }
 
-    stages {
+    stages
+    {
+        stage('Print parameters') {
+            steps {
+                script {
+                    def reason = "${params.reason}"
+
+                    println("Reason: $reason")
+                    if (reason.contains("test")) {
+                        println("Test mode")
+                    } else {
+                        println("Production mode")
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Building..'
