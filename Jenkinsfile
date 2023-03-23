@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'reason', description: 'Reason to run the job')
+    }
 
     stages {
         stage('Build') {
